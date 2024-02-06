@@ -3,7 +3,6 @@ class ApiResponse {
     (this.statusCode = statusCode),
       (this.data = data),
       (this.message = message),
-      (this.productCount = productCount),
       (this.success = statusCode < 400);
   }
 }

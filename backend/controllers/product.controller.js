@@ -26,16 +26,12 @@ const getAllProducts = asyncHandler(async (req, res) => {
     .pagination(resultPerPage);
   const products = await apiFeature.query;
 
-  return res
-    .status(200)
-    .json(
-      new ApiResponse(
-        201,
-        products,
-        "All produsts fetched sucessfuly",
-        productCount
-      )
-    );
+  return res.status(201).json({
+    success: true,
+    products,
+    productCount,
+    message: "all products are fetched successfully",
+  });
 });
 
 // update product -- ADMIN

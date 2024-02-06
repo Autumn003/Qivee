@@ -14,9 +14,11 @@ app.use(fileUpload());
 // routes import
 import product from "./routes/product.routes.js";
 import user from "./routes/user.routes.js";
+import order from "./routes/order.routes.js";
 
 // routes declaration
 app.use("/api/v1/", product);
 app.use("/api/v1/", user);
+app.use("/api/v1/", order);
 
 export { app };
