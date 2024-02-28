@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   AiOutlineClose,
   AiOutlineMenu,
+  AiOutlineSearch,
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
@@ -41,14 +42,23 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      <button className="hover:bg-slate-500 p-3 rounded-full duration-300">
+      <Link
+        to={"/cart"}
+        className="hover:bg-slate-500 p-3 rounded-full duration-300"
+      >
         <AiOutlineShoppingCart size={25} />
-      </button>
-      <button className="hover:bg-slate-500 p-3 rounded-full duration-300">
+      </Link>
+      <Link
+        to={"/user"}
+        className="hover:bg-slate-500 p-3 rounded-full duration-300"
+      >
         <AiOutlineUser size={25} />
-      </button>
+      </Link>
       {/* Mobile Navigation Icon */}
-      <div onClick={handleNav} className="block md:hidden p-2">
+      <div
+        onClick={handleNav}
+        className="block md:hidden cursor-pointer hover:bg-slate-500 p-4 rounded-full duration-300"
+      >
         {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
 

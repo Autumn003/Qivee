@@ -6,6 +6,7 @@ import { Loader } from "../index";
 import ReviewCard from "./ReviewCard.jsx";
 import ReactStars from "react-rating-stars-component";
 import { useAlert } from "react-alert";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = () => {
   let { id } = useParams();
@@ -74,6 +75,7 @@ const ProductDetails = () => {
 
   return (
     <>
+      <MetaData title={`${productDetail.name} - QIVEE`} />
       {loading ? (
         <Loader />
       ) : (

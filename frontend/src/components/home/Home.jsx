@@ -4,10 +4,12 @@ import MetaData from "../layout/MetaData";
 import { clearErrors, getProducts } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+
   const { products, productCount } = useSelector(
     (state) => state.products.data
   );
@@ -75,12 +77,16 @@ const Home = () => {
 
             <div className="md:flex md:flex-wrap md:justify-evenly">
               {products &&
-                products.map((product) => <ProductCard product={product} />)}
+                products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
             </div>
 
-            <button className="border-2 bg-slate-200 border-slate-600 text-slate-800 hover:text-white p-4 my-8 mt-12 rounded-xl hover:bg-slate-600 transition ">
-              Explore all products
-            </button>
+            <Link to={`/Products`}>
+              <button className="border-2 bg-slate-200 border-slate-400 text-slate-800 font-semibold p-4 my-8 mt-12 rounded-xl hover:scale-105 duration-150">
+                Explore all products
+              </button>
+            </Link>
           </div>
         </>
       )}

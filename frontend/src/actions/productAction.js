@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// get all products
 export const getProducts = createAsyncThunk(
   "products",
   async (apiUrl, { rejectWithValue }) => {
@@ -13,6 +14,7 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// Get single product details
 export const getProductDetails = createAsyncThunk(
   "product/getProductDetails",
   async ({ id, apiUrl }, { rejectWithValue }) => {
@@ -25,6 +27,7 @@ export const getProductDetails = createAsyncThunk(
   }
 );
 
+// to clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: "products/clearErrors" });
 };

@@ -16,21 +16,57 @@ const createProduct = asyncHandler(async (req, res) => {
 });
 
 // get all products
+// const getAllProducts = asyncHandler(async (req, res) => {
+//   const resultPerPage = 8;
+//   const productCount = await Product.countDocuments();
+
+//   const apiFeature = new ApiFeatures(Product.find(), req.query)
+//     .search()
+//     .filter()
+//     .pagination(resultPerPage);
+//   const products = await apiFeature.query;
+
+//   return res.status(201).json({
+//     success: true,
+//     products,
+//     productCount,
+//     resultPerPage,
+//     message: "all products are fetched successfully",
+//   });
+// });
+
+// get all products
 const getAllProducts = asyncHandler(async (req, res) => {
   const resultPerPage = 8;
-  const productCount = await Product.countDocuments();
+  let productCount;
+  let products;
 
-  const apiFeature = new ApiFeatures(Product.find(), req.query)
-    .search()
-    .filter()
-    .pagination(resultPerPage);
-  const products = await apiFeature.query;
+  // Check if a search query is provided
+  if (req.query.keyword) {
+    // Fetch products based on the search keyword
+    const regex = new RegExp(req.query.keyword, "i"); // Case-insensitive search
+    productCount = await Product.countDocuments({
+      $or: [{ name: regex }, { description: regex }],
+    });
+    products = await Product.find({
+      $or: [{ name: regex }, { description: regex }],
+    })
+      .limit(resultPerPage)
+      .skip(resultPerPage * (req.query.page - 1));
+  } else {
+    // Fetch all products
+    productCount = await Product.countDocuments();
+    products = await Product.find()
+      .limit(resultPerPage)
+      .skip(resultPerPage * (req.query.page - 1));
+  }
 
-  return res.status(201).json({
+  return res.status(200).json({
     success: true,
     products,
     productCount,
-    message: "all products are fetched successfully",
+    resultPerPage,
+    message: "All products fetched successfully",
   });
 });
 

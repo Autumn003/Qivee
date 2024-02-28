@@ -21,6 +21,7 @@ export const productSlice = createSlice({
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
+      state.resultPerPage = action.payload.resultPerPage;
     });
     builder.addCase(getProducts.rejected, (state, action) => {
       state.loading = false;
@@ -28,34 +29,6 @@ export const productSlice = createSlice({
     });
   },
 });
-
-// export const productDetailSlice = createSlice({
-//   name: "productDetails",
-//   initialState: {
-//     data: {},
-//     loading: false,
-//     error: null,
-//   },
-//   reducers: {
-//     clearProductDetailData(state) {
-//       state.data = null;
-//     },
-//   },
-//   extraReducers: (builder) => {
-//     builder.addCase(getProductDetails.pending, (state) => {
-//       state.loading = true;
-//       state.error = null;
-//     });
-//     builder.addCase(getProductDetails.fulfilled, (state, action) => {
-//       state.loading = false;
-//       state.data = action.payload;
-//     });
-//     builder.addCase(getProductDetails.rejected, (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload;
-//     });
-//   },
-// });
 
 const productDetailSlice = createSlice({
   name: "product",
