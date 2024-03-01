@@ -22,7 +22,7 @@ export const getProductDetails = createAsyncThunk(
       const response = await axios.get(apiUrl);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

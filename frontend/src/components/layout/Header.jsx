@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import {
   AiOutlineClose,
   AiOutlineMenu,
-  AiOutlineSearch,
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
-import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -49,7 +47,7 @@ const Header = () => {
         <AiOutlineShoppingCart size={25} />
       </Link>
       <Link
-        to={"/user"}
+        to={"/login"}
         className="hover:bg-slate-500 p-3 rounded-full duration-300"
       >
         <AiOutlineUser size={25} />

@@ -4,5 +4,16 @@ import Home from "./home/Home";
 import ProductCard from "./home/ProductCard";
 import Loader from "./layout/Loader";
 import ProductDetails from "./product/ProductDetails";
+import LoginSignup from "./user/LoginSignup";
+import Products from "./product/Products";
 
-export { Header, Footer, Home, ProductCard, Loader, ProductDetails };
+export {
+  Header,
+  Footer,
+  Home,
+  ProductCard,
+  Loader,
+  ProductDetails,
+  LoginSignup,
+  Products,
+};

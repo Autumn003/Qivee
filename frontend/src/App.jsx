@@ -1,10 +1,15 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Header, Footer, Home, ProductDetails } from "./components";
+import {
+  Header,
+  Footer,
+  Home,
+  ProductDetails,
+  Products,
+  LoginSignup,
+} from "./components";
 import webfont from "webfontloader";
 import { useEffect } from "react";
-import Products from "./components/product/Products";
-// import Search from "./components/product/Search";
 
 function App() {
   useEffect(() => {
@@ -24,7 +29,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
-        {/* <Route path="/search" element={<Search />} /> */}
+        <Route path="/login" element={<LoginSignup />} />
       </Routes>
       <Footer />
     </Router>
