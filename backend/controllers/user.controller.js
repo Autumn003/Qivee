@@ -4,7 +4,9 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { sendtoken } from "../utils/jwtToken.js";
 import { sendEmail } from "../utils/sendEmail.js";
+// import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import crypto from "crypto";
+import { v2 as cloudinary } from "cloudinary";
 
 // register a user
 const registerUser = asyncHandler(async (req, res) => {
@@ -15,13 +17,22 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "User already exist with this email");
   }
 
+  // const avatarLocalPath = req.files?.avatar[0]?.path;
+  // const avatar = await uploadOnCloudinary(avatarLocalPath);
+
+  const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const user = await User.create({
     name,
     email,
     password,
     avatar: {
-      public_id: "sample_id",
-      url: "sampleurl",
+      url: myCloud.url,
+      public_id: myCloud.public_id,
     },
   });
 

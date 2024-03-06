@@ -10,6 +10,8 @@ import {
 } from "./components";
 import webfont from "webfontloader";
 import { useEffect } from "react";
+import store from "./store/store.js";
+import { loadUser } from "./actions/userAction";
 
 function App() {
   useEffect(() => {
@@ -18,6 +20,8 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+
+    store.dispatch(loadUser());
   }, []);
 
   return (
