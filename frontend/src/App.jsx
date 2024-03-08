@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import {
   Header,
   Footer,
@@ -7,15 +12,20 @@ import {
   ProductDetails,
   Products,
   LoginSignup,
+  Profile,
 } from "./components";
-import webfont from "webfontloader";
+import WebFont from "webfontloader";
 import { useEffect } from "react";
 import store from "./store/store.js";
 import { loadUser } from "./actions/userAction";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.user.data);
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   useEffect(() => {
-    webfont.load({
+    WebFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
@@ -26,7 +36,7 @@ function App() {
 
   return (
     <Router>
-      <Header />;
+      <Header />
       <Routes>
         <Route path="/Home" element={<Home />} />
         <Route path="/" element={<Home />} />
@@ -34,6 +44,11 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/login" element={<LoginSignup />} />
+        {isAuthenticated ? (
+          <Route path="/account" element={<Profile user={user} />} />
+        ) : (
+          <Route path="/account" element={<Navigate to="/login" />} />
+        )}
       </Routes>
       <Footer />
     </Router>

@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
       <img
         src={product.images[0].url}
         alt={product.name}
-        className="h-44 w-40 rounded-lg"
+        className="h-44 w-40 rounded-lg object-cover"
       />
       <p className=" text-slate-800 font-bold mt-2">{product.name}</p>
       <div className="flex items-center my-[6px]">

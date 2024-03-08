@@ -6,6 +6,7 @@ import Loader from "./layout/Loader";
 import ProductDetails from "./product/ProductDetails";
 import LoginSignup from "./user/LoginSignup";
 import Products from "./product/Products";
+import Profile from "./user/Profile";
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   ProductDetails,
   LoginSignup,
   Products,
+  Profile,
 };

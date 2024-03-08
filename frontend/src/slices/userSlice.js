@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register, loadUser } from "../actions/userAction";
+import { login, register, loadUser, logout } from "../actions/userAction";
 
 export const userSlice = createSlice({
   name: "auth",
@@ -12,6 +12,7 @@ export const userSlice = createSlice({
   reducers: {
     clearUserData(state) {
       state.data = {};
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
@@ -55,6 +56,15 @@ export const userSlice = createSlice({
         state.resultPerPage = action.payload.resultPerPage;
       })
       .addCase(loadUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.loading = false;
+        state.data = {};
+        state.isAuthenticated = false;
+      })
+      .addCase(logout.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

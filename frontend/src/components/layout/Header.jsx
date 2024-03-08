@@ -40,18 +40,21 @@ const Header = () => {
           </li>
         ))}
       </ul>
+
       <Link
         to={"/cart"}
         className="hover:bg-slate-500 p-3 rounded-full duration-300"
       >
         <AiOutlineShoppingCart size={25} />
       </Link>
+
       <Link
         to={"/login"}
         className="hover:bg-slate-500 p-3 rounded-full duration-300"
       >
         <AiOutlineUser size={25} />
       </Link>
+
       {/* Mobile Navigation Icon */}
       <div
         onClick={handleNav}

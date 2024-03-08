@@ -3,7 +3,7 @@ import axios from "axios";
 
 // login action
 export const login = createAsyncThunk(
-  "auth/login",
+  "user/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const config = { headers: { "Content-Type": "application/json" } };
@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
 
 // register action
 export const register = createAsyncThunk(
-  "auth/register",
+  "user/register",
   async (userData, { rejectWithValue }) => {
     try {
       const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -40,6 +40,18 @@ export const loadUser = createAsyncThunk(
     try {
       const response = await axios.get(`/api/v1/me`);
       return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// logout user
+export const logout = createAsyncThunk(
+  "user/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await axios.get(`/api/v1/logout`);
     } catch (error) {
       return rejectWithValue(error.message);
     }

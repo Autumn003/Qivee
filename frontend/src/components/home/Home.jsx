@@ -57,7 +57,7 @@ const Home = () => {
       ) : (
         <>
           <MetaData title="QIVEE" />
-          <div className=" carousel mb-6 mx-3  transition-transform ease-out ">
+          <div className=" carousel mb-6 mx-3 my-7 transition-transform ease-out ">
             <div
               style={{
                 backgroundImage: `url(${slides[currentIndex].url})`,
@@ -77,8 +77,8 @@ const Home = () => {
 
             <div className="md:flex md:flex-wrap md:justify-evenly">
               {products &&
-                products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                products?.map((product, index) => (
+                  <ProductCard key={product.id || index} product={product} />
                 ))}
             </div>
 
