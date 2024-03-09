@@ -187,9 +187,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     useFindAndModify: false,
   });
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, {}, "User profile updated successfully"));
+  return res.status(200).json({ success: true });
 });
 
 // get all users (ADMIN)
