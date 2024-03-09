@@ -115,9 +115,8 @@ const profileSlice = createSlice({
     message: null,
   },
   reducers: {
-    clearUserData(state) {
-      state.data = {};
-      // state.isAuthenticated = false;
+    resetUpdateProfile(state) {
+      state.isUpdated = false;
     },
   },
   extraReducers: (builder) => {
@@ -140,6 +139,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const { clearUserData } = profileSlice.actions;
+export const { resetUpdateProfile } = profileSlice.actions;
 
 export const profileReducer = profileSlice.reducer;
