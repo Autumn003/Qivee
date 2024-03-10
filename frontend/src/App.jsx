@@ -14,6 +14,7 @@ import {
   LoginSignup,
   Profile,
   UpdateProfile,
+  UpdatePassword,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
@@ -54,6 +55,14 @@ function App() {
           <Route path="/me/update" element={<UpdateProfile />} />
         ) : (
           <Route path="/me/update" element={<Navigate to="/login" />} />
+        )}
+        {isAuthenticated ? (
+          <Route
+            path="/password/update"
+            element={<UpdatePassword user={user} />}
+          />
+        ) : (
+          <Route path="/password/update" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />

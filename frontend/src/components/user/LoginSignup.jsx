@@ -26,7 +26,7 @@ const LoginSignup = () => {
 
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState("/Profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
   const loginSubmit = (e) => {
@@ -164,7 +164,7 @@ const LoginSignup = () => {
               <form
                 className="signupForm bg-white hidden flex-col items-center m-auto p-2 justify-evenly h-[80%] -translate-y-full -translate-x-full"
                 ref={registerTab}
-                encType="multipaert/form-data"
+                encType="multipart/form-data"
                 onSubmit={registerSubmit}
               >
                 <div className="signupName flex items-center w-[100%]">

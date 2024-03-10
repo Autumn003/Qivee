@@ -8,6 +8,7 @@ import LoginSignup from "./user/LoginSignup";
 import Products from "./product/Products";
 import Profile from "./user/Profile";
 import UpdateProfile from "./user/UpdateProfile";
+import UpdatePassword from "./user/UpdatePassword";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   Products,
   Profile,
   UpdateProfile,
+  UpdatePassword,
 };

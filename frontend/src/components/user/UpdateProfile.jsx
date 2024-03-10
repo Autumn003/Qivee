@@ -6,19 +6,20 @@ import { clearErrors, updateProfile } from "../../actions/profileActions";
 import { useAlert } from "react-alert";
 import { Loader } from "../index";
 import { loadUser } from "../../actions/userAction";
-import { resetUpdateProfile } from "../../slices/profileSlice";
+import { resetUpdate } from "../../slices/profileSlice";
+import MetaData from "../layout/MetaData";
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.data);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
   const updateProfileSubmit = (e) => {
@@ -27,7 +28,7 @@ const UpdateProfile = () => {
 
     myForm.set("name", name);
     myForm.set("email", email);
-    myForm.set("avatar", avatar); // You missed adding avatar to the form data
+    myForm.set("avatar", avatar);
     dispatch(updateProfile(myForm));
   };
 
@@ -67,7 +68,7 @@ const UpdateProfile = () => {
       dispatch(loadUser());
       navigate("/account");
 
-      dispatch({ type: resetUpdateProfile });
+      dispatch({ type: resetUpdate });
     }
   }, [dispatch, error, alert, isUpdated, user, navigate]);
 
@@ -77,6 +78,7 @@ const UpdateProfile = () => {
         <Loader />
       ) : (
         <>
+          <MetaData title="Update profile - QIVEE" />
           <div className="updateProfileContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 fixed top-0 left-0">
             <div className="updateProfileBox bg-white w-80 sm:h-4/5 h-[65%] box-border rounded-2xl">
               <h2 className="text-center p-4 text-xl font-semibold text-slate-600">

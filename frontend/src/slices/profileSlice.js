@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateProfile } from "../actions/profileActions";
+import { updateProfile, updatePassword } from "../actions/profileActions";
 
 // const profileSlice = createSlice({
 //   name: "profile",
@@ -115,7 +115,7 @@ const profileSlice = createSlice({
     message: null,
   },
   reducers: {
-    resetUpdateProfile(state) {
+    resetUpdate(state) {
       state.isUpdated = false;
     },
   },
@@ -135,10 +135,25 @@ const profileSlice = createSlice({
         state.error = action.error;
         state.loading = false;
         state.message = `Failed to update the profile.`;
+      })
+      .addCase(updatePassword.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
+        const data = action.payload;
+        state.data = data;
+        state.loading = false;
+        state.isUpdated = true;
+        state.message = `Profile updated successfully!`;
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
+        state.error = action.error;
+        state.loading = false;
+        state.message = `Failed to update the profile.`;
       });
   },
 });
 
-export const { resetUpdateProfile } = profileSlice.actions;
+export const { resetUpdate } = profileSlice.actions;
 
 export const profileReducer = profileSlice.reducer;

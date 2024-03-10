@@ -155,7 +155,7 @@ const getUserDetails = asyncHandler(async (req, res) => {
 const updatePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id).select("+password");
 
-  const isPasswordMatched = await user.comparePassword(req.body.oldpassword);
+  const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
   if (!isPasswordMatched) {
     throw new ApiError(400, "old password is incorrect");
