@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateProfile, updatePassword } from "../actions/profileActions";
+import {
+  updateProfile,
+  updatePassword,
+  forgotPassword,
+  resetPassword,
+} from "../actions/profileActions";
 
 // const profileSlice = createSlice({
 //   name: "profile",
@@ -154,6 +159,48 @@ const profileSlice = createSlice({
   },
 });
 
-export const { resetUpdate } = profileSlice.actions;
+const forgotPasswordSlice = createSlice({
+  name: "profile",
+  initialState: {
+    loading: false,
+    error: null,
+    message: null,
+  },
+  reducers: {
+    resetUpdate(state) {
+      state.message = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(forgotPassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload;
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = action.payload;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export const { resetUpdate } = forgotPasswordSlice.actions;
 
 export const profileReducer = profileSlice.reducer;
+export const forgotPasswordReducer = forgotPasswordSlice.reducer;

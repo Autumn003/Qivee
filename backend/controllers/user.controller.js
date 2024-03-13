@@ -82,12 +82,11 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   // get resetPassword Token
-
   const resetToken = user.getResetPasswordToken();
-
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+  // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
@@ -98,12 +97,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
       message,
     });
 
-    return res
-      .status(200)
-      .json(new ApiResponse(200, {}, `Recovery mail sent to ${user.email}`));
+    return res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully`,
+    });
   } catch (error) {
-    (user.resetPasswordToken = undefined),
-      (user.resetPasswordExpire = undefined);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
 
     await user.save({ validateBeforeSave: false });
     throw new ApiError(500, error.message);

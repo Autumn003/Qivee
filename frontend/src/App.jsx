@@ -15,6 +15,8 @@ import {
   Profile,
   UpdateProfile,
   UpdatePassword,
+  ForgotPassword,
+  ResetPassword,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
@@ -46,6 +48,10 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/login" element={<LoginSignup />} />
+        <Route path="/password/forgot" element={<ForgotPassword />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
+
+        {/* protected routes */}
         {isAuthenticated ? (
           <Route path="/account" element={<Profile user={user} />} />
         ) : (
