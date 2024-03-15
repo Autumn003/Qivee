@@ -11,6 +11,7 @@ import UpdateProfile from "./user/UpdateProfile";
 import UpdatePassword from "./user/UpdatePassword";
 import ForgotPassword from "./user/ForgotPassword";
 import ResetPassword from "./user/ResetPassword";
+import Cart from "./cart/Cart";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   UpdatePassword,
   ForgotPassword,
   ResetPassword,
+  Cart,
 };

@@ -7,6 +7,7 @@ import ReviewCard from "./ReviewCard.jsx";
 import ReactStars from "react-rating-stars-component";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
+import { addToCart } from "../../actions/cartAction.js";
 
 const ProductDetails = () => {
   let { id } = useParams();
@@ -21,6 +22,11 @@ const ProductDetails = () => {
 
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const addToCartHandler = () => {
+    dispatch(addToCart({ id, quantity: quantity }));
+    alert.success("Item added to cart");
+  };
 
   useEffect(() => {
     if (error) {
@@ -71,6 +77,20 @@ const ProductDetails = () => {
     size: window.innerWidth < 600 ? 20 : 25,
     value: productDetail.ratings,
     isHalf: true,
+  };
+
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    if (productDetail.stock > quantity) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -124,19 +144,29 @@ const ProductDetails = () => {
                   </h1>
                   <div className="3-1 my-4 flex items-center">
                     <div className="3-1-1 ">
-                      <button className=" px-4 pb-1 bg-slate-400 hover:bg-slate-600 duration-200 rounded-lg font-semibold text-2xl ">
+                      <button
+                        onClick={decreaseQuantity}
+                        className=" px-4 pb-1 bg-slate-400 hover:bg-slate-600 duration-200 rounded-lg font-semibold text-2xl "
+                      >
                         -
                       </button>
                       <input
                         type="number"
-                        value="1"
+                        readOnly
+                        value={quantity}
                         className="outline-none w-12 h-10 text-center"
                       />
-                      <button className=" px-4 py-1 bg-slate-400 hover:bg-slate-600 duration-200 rounded-lg font-semibold text-xl">
+                      <button
+                        onClick={increaseQuantity}
+                        className=" px-4 py-1 bg-slate-400 hover:bg-slate-600 duration-200 rounded-lg font-semibold text-xl"
+                      >
                         +
                       </button>
                     </div>{" "}
-                    <button className=" bg-slate-400 text-slate-900 hover:scale-110 duration-200 p-3 w-56 ml-6 rounded-full font-semibold text-xl">
+                    <button
+                      onClick={addToCartHandler}
+                      className=" bg-slate-400 text-slate-900 hover:scale-110 duration-200 p-3 w-56 ml-6 rounded-full font-semibold text-xl"
+                    >
                       Add To Cart
                     </button>
                   </div>

@@ -17,6 +17,7 @@ import {
   UpdatePassword,
   ForgotPassword,
   ResetPassword,
+  Cart,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
@@ -50,6 +51,7 @@ function App() {
         <Route path="/login" element={<LoginSignup />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route path="/cart" element={<Cart />} />
 
         {/* protected routes */}
         {isAuthenticated ? (
