@@ -19,10 +19,27 @@ export const addToCart = createAsyncThunk(
 
       localStorage.setItem(
         "cartItems",
-        JSON.stringify([...getState().cart.cartItems, cartItem])
+        JSON.stringify(getState().cart.cartItems)
       );
 
       return cartItem;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);
+
+// Remove from cart action
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async (id, { getState }) => {
+    try {
+      const updatedCartItems = getState().cart.cartItems.filter(
+        (item) => item.product !== id
+      );
+
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      return id;
     } catch (error) {
       throw new Error(error.message);
     }

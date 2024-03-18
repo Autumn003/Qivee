@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart } from "../actions/cartAction";
+import { addToCart, removeFromCart } from "../actions/cartAction";
 
 // Define initial state
 const initialState = {
@@ -15,23 +15,26 @@ const cartSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(addToCart.fulfilled, (state, action) => {
-      const item = action.payload;
-      const isItemExist = state.cartItems.find(
-        (i) => i.product === item.product
-      );
-
-      if (isItemExist) {
-        state.cartItems = state.cartItems.map((i) =>
-          i.product === isItemExist.product ? item : i
+    builder
+      .addCase(addToCart.fulfilled, (state, action) => {
+        const item = action.payload;
+        const isItemExist = state.cartItems.find(
+          (i) => i.product === item.product
         );
-      } else {
-        state.cartItems.push(item);
-      }
-    });
-    //   .addCase(removeCartItem, (state, action) => {
-    //     state.cartItems = state.cartItems.filter((i) => i.product !== action.payload);
-    //   })
+
+        if (isItemExist) {
+          state.cartItems = state.cartItems.map((i) =>
+            i.product === isItemExist.product ? item : i
+          );
+        } else {
+          state.cartItems.push(item);
+        }
+      })
+      .addCase(removeFromCart.fulfilled, (state, action) => {
+        state.cartItems = state.cartItems.filter(
+          (i) => i.product !== action.payload
+        );
+      });
     //   .addCase(saveShippingInfo, (state, action) => {
     //     state.shippingInfo = action.payload;
     //   });
