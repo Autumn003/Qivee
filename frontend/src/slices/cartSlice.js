@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addToCart, removeFromCart } from "../actions/cartAction";
+import {
+  addToCart,
+  removeFromCart,
+  saveShippingInfo,
+} from "../actions/cartAction";
 
 // Define initial state
 const initialState = {
   cartItems: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
-  shippingInfo: {},
+  shippingInfo: localStorage.getItem("shippingInfo")
+    ? JSON.parse(localStorage.getItem("shippingInfo"))
+    : {},
 };
 
 // Create slice
@@ -34,10 +40,10 @@ const cartSlice = createSlice({
         state.cartItems = state.cartItems.filter(
           (i) => i.product !== action.payload
         );
+      })
+      .addCase(saveShippingInfo.fulfilled, (state, action) => {
+        state.shippingInfo = action.payload;
       });
-    //   .addCase(saveShippingInfo, (state, action) => {
-    //     state.shippingInfo = action.payload;
-    //   });
   },
 });
 

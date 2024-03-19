@@ -45,3 +45,16 @@ export const removeFromCart = createAsyncThunk(
     }
   }
 );
+
+// Save shipping info action
+export const saveShippingInfo = createAsyncThunk(
+  "cart/saveShippingInfo",
+  async (data) => {
+    try {
+      localStorage.setItem("shippingInfo", JSON.stringify(data));
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+);

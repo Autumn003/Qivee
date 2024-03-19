@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { AiOutlineLock, AiOutlineMail, AiOutlineUser } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
@@ -10,6 +10,7 @@ const LoginSignup = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
@@ -66,6 +67,7 @@ const LoginSignup = () => {
     (state) => state.user
   );
 
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -73,9 +75,9 @@ const LoginSignup = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirect);
     }
-  }, [dispatch, error, alert, isAuthenticated, navigate]);
+  }, [dispatch, error, alert, isAuthenticated, navigate, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
