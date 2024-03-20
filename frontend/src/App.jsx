@@ -20,16 +20,32 @@ import {
   Cart,
   Shipping,
   ConfirmOrder,
+  Payment,
 } from "./components";
 import WebFont from "webfontloader";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import store from "./store/store.js";
 import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 function App() {
   const user = useSelector((state) => state.user.data);
   const { isAuthenticated } = useSelector((state) => state.user);
+
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    try {
+      const { data } = await axios.get("/api/v1/stripeapikey");
+      setStripeApiKey(data.stripeApiKey);
+    } catch (error) {
+      console.error("Error fetching Stripe API key:", error);
+      // Handle the error, e.g., show an error message to the user
+    }
+  }
 
   useEffect(() => {
     WebFont.load({
@@ -39,6 +55,7 @@ function App() {
     });
 
     store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
@@ -85,6 +102,23 @@ function App() {
           <Route path="/order/confirm" element={<ConfirmOrder />} />
         ) : (
           <Route path="/order/confirm" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated ? (
+          <>
+            {stripeApiKey && (
+              <Route
+                path="/process/payment"
+                element={
+                  <Elements stripe={loadStripe(stripeApiKey)}>
+                    <Payment />
+                  </Elements>
+                }
+              />
+            )}
+          </>
+        ) : (
+          <Route path="/process/payment" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />
