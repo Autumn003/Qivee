@@ -13,6 +13,7 @@ import ForgotPassword from "./user/ForgotPassword";
 import ResetPassword from "./user/ResetPassword";
 import Cart from "./cart/Cart";
 import Shipping from "./cart/Shipping";
+import ConfirmOrder from "./cart/ConfirmOrder";
 
 export {
   Header,
@@ -30,4 +31,5 @@ export {
   ResetPassword,
   Cart,
   Shipping,
+  ConfirmOrder,
 };

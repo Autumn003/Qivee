@@ -11,7 +11,7 @@ import {
   AiFillPhone,
   AiOutlineGlobal,
 } from "react-icons/ai";
-import { FaMapLocationDot, FaLocationDot } from "react-icons/fa6";
+import { FaMapLocationDot, FaLocationDot, FaUser } from "react-icons/fa6";
 
 const Shipping = () => {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ const Shipping = () => {
 
   const { shippingInfo } = useSelector((state) => state.cart);
 
+  const [name, setName] = useState(shippingInfo.name);
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
   const [state, setState] = useState(shippingInfo.state);
@@ -36,7 +37,15 @@ const Shipping = () => {
     }
 
     dispatch(
-      saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
+      saveShippingInfo({
+        name,
+        address,
+        city,
+        state,
+        country,
+        pinCode,
+        phoneNo,
+      })
     );
 
     navigate("/order/confirm");
@@ -58,6 +67,17 @@ const Shipping = () => {
             encType="multipart/form-data"
             onSubmit={shippingSubmit}
           >
+            <div className=" flex items-center w-[100%]">
+              <FaUser className="absolute translate-x-11" />
+              <input
+                type="text"
+                placeholder="Name"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="px-10 py-2 pr-2 mx-auto w-80 border-[1px] border-slate-400 rounded-md outline-none"
+              />
+            </div>
             <div className=" flex items-center w-[100%]">
               <AiFillHome className="absolute translate-x-11" />
               <input

@@ -19,6 +19,7 @@ import {
   ResetPassword,
   Cart,
   Shipping,
+  ConfirmOrder,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect } from "react";
@@ -78,6 +79,12 @@ function App() {
           <Route path="/login/shipping" element={<Shipping />} />
         ) : (
           <Route path="/login/shipping" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated ? (
+          <Route path="/order/confirm" element={<ConfirmOrder />} />
+        ) : (
+          <Route path="/order/confirm" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />
