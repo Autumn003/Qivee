@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import { FaCreditCard, FaCalendar, FaKey } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { clearErrors, createOrder } from "../../actions/orderActions";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -25,9 +26,19 @@ const Payment = () => {
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.data);
+  const { error } = useSelector((state) => state.newOrder);
 
   const paymentData = {
     amount: Math.round(orderInfo.totalAmount * 100),
+  };
+
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: orderInfo.subTotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalAmount,
   };
 
   const submitHandler = async (e) => {
@@ -74,6 +85,22 @@ const Payment = () => {
         alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+
+          order.shippingInfo = {
+            phoneNo: shippingInfo.phoneNo,
+            country: shippingInfo.country,
+            state: shippingInfo.state,
+            pincode: shippingInfo.pinCode,
+            city: shippingInfo.city,
+            address: shippingInfo.address,
+          };
+
+          dispatch(createOrder({ order }));
+
           alert.success("Payment Successful!");
           navigate("/success");
         } else {
@@ -85,6 +112,13 @@ const Payment = () => {
       alert.error(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, alert]);
 
   return (
     <>
