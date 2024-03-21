@@ -21,6 +21,7 @@ import {
   Shipping,
   ConfirmOrder,
   Payment,
+  OrderSuccess,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
@@ -119,6 +120,12 @@ function App() {
           </>
         ) : (
           <Route path="/process/payment" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated ? (
+          <Route path="/success" element={<OrderSuccess />} />
+        ) : (
+          <Route path="/success" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />

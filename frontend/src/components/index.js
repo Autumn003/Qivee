@@ -15,6 +15,7 @@ import Cart from "./cart/Cart";
 import Shipping from "./cart/Shipping";
 import ConfirmOrder from "./cart/ConfirmOrder";
 import Payment from "./cart/Payment";
+import OrderSuccess from "./cart/OrderSuccess";
 
 export {
   Header,
@@ -34,4 +35,5 @@ export {
   Shipping,
   ConfirmOrder,
   Payment,
+  OrderSuccess,
 };
