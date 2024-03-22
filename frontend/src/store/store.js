@@ -3,7 +3,11 @@ import { productReducer, productDetailReducer } from "../slices/productSlice";
 import { userReducer } from "../slices/userSlice";
 import { forgotPasswordReducer, profileReducer } from "../slices/profileSlice";
 import { cartReducer } from "../slices/cartSlice";
-import { orderReducer } from "../slices/orderSlice";
+import {
+  OrderDetailsReducer,
+  myOrderReducer,
+  orderReducer,
+} from "../slices/orderSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +18,8 @@ const store = configureStore({
     forgotPassword: forgotPasswordReducer,
     cart: cartReducer,
     newOrder: orderReducer,
+    myOrder: myOrderReducer,
+    orderDetails: OrderDetailsReducer,
   },
 });
 

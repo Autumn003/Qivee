@@ -22,6 +22,8 @@ import {
   ConfirmOrder,
   Payment,
   OrderSuccess,
+  MyOrders,
+  OrderDetails,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
@@ -100,12 +102,6 @@ function App() {
         )}
 
         {isAuthenticated ? (
-          <Route path="/order/confirm" element={<ConfirmOrder />} />
-        ) : (
-          <Route path="/order/confirm" element={<Navigate to="/login" />} />
-        )}
-
-        {isAuthenticated ? (
           <>
             {stripeApiKey && (
               <Route
@@ -126,6 +122,31 @@ function App() {
           <Route path="/success" element={<OrderSuccess />} />
         ) : (
           <Route path="/success" element={<Navigate to="/login" />} />
+        )}
+        {isAuthenticated ? (
+          <Route path="/orders" element={<MyOrders />} />
+        ) : (
+          <Route path="/orders" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated ? (
+          <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+        ) : (
+          <Route
+            exact
+            path="/order/confirm"
+            element={<Navigate to="/login" />}
+          />
+        )}
+
+        {isAuthenticated ? (
+          <Route exact path="/orders/order/:id" element={<OrderDetails />} />
+        ) : (
+          <Route
+            exact
+            path="/orders/order/:id"
+            element={<Navigate to="/login" />}
+          />
         )}
       </Routes>
       <Footer />

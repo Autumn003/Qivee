@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createOrder } from "../actions/orderActions";
+import { createOrder, myOrders, orderDetails } from "../actions/orderActions";
 
 const initialState = {
   orders: [],
@@ -23,9 +23,57 @@ const orderSlice = createSlice({
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
+      });
+  },
+});
+
+const myOrderSlice = createSlice({
+  name: "myOrders",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(myOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(myOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+        state.loading = false;
+      })
+      .addCase(myOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+const OrderDetaislSlice = createSlice({
+  name: "myOrders/order",
+  initialState: {
+    order: {},
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(orderDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(orderDetails.fulfilled, (state, action) => {
+        state.order = action.payload;
+        state.loading = false;
+      })
+      .addCase(orderDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const orderReducer = orderSlice.reducer;
+export const myOrderReducer = myOrderSlice.reducer;
+export const OrderDetailsReducer = OrderDetaislSlice.reducer;

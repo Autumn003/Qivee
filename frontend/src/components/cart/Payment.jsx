@@ -91,6 +91,7 @@ const Payment = () => {
           };
 
           order.shippingInfo = {
+            name: shippingInfo.name,
             phoneNo: shippingInfo.phoneNo,
             country: shippingInfo.country,
             state: shippingInfo.state,

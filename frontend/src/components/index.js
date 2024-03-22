@@ -16,6 +16,8 @@ import Shipping from "./cart/Shipping";
 import ConfirmOrder from "./cart/ConfirmOrder";
 import Payment from "./cart/Payment";
 import OrderSuccess from "./cart/OrderSuccess";
+import MyOrders from "./orders/MyOrders";
+import OrderDetails from "./orders/OrderDetails";
 
 export {
   Header,
@@ -36,4 +38,6 @@ export {
   ConfirmOrder,
   Payment,
   OrderSuccess,
+  MyOrders,
+  OrderDetails,
 };

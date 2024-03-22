@@ -5,8 +5,8 @@ import MetaData from "../layout/MetaData";
 
 const ConfirmOrder = () => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
-  const { data } = useSelector((state) => state.user);
-  const user = data;
+  // const { data } = useSelector((state) => state.user);
+  // const user = data;
 
   const navigate = useNavigate();
 

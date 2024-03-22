@@ -3,6 +3,10 @@ import mongoose, { Schema } from "mongoose";
 const orderSchema = new Schema(
   {
     shippingInfo: {
+      name: {
+        type: String,
+        required: true,
+      },
       address: {
         type: String,
         required: true,

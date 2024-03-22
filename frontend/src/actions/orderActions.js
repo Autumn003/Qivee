@@ -31,6 +31,32 @@ export const createOrder = createAsyncThunk(
   }
 );
 
+// get my order
+export const myOrders = createAsyncThunk(
+  "order/myOrders",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/api/v1/orders/me");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// get my order
+export const orderDetails = createAsyncThunk(
+  "order/myOrders",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/v1/order/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // to clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch("order/clearError");
