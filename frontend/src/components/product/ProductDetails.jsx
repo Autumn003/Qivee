@@ -164,6 +164,7 @@ const ProductDetails = () => {
                       </button>
                     </div>{" "}
                     <button
+                      disabled={product.stock === 0 ? true : false}
                       onClick={addToCartHandler}
                       className=" bg-slate-400 text-slate-900 hover:scale-110 duration-200 p-3 w-56 ml-6 rounded-full font-semibold text-xl"
                     >
