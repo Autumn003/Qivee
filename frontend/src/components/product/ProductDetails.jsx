@@ -164,7 +164,7 @@ const ProductDetails = () => {
                       </button>
                     </div>{" "}
                     <button
-                      disabled={product.stock === 0 ? true : false}
+                      disabled={productDetail.stock === 0 ? true : false}
                       onClick={addToCartHandler}
                       className=" bg-slate-400 text-slate-900 hover:scale-110 duration-200 p-3 w-56 ml-6 rounded-full font-semibold text-xl"
                     >
@@ -202,7 +202,7 @@ const ProductDetails = () => {
                 <div className="flex flex-none m-10 overflow-x-auto gap-5">
                   {productDetail.reviews &&
                     productDetail.reviews.map((review) => (
-                      <ReviewCard review={review} />
+                      <ReviewCard key={review._id} review={review} />
                     ))}
                 </div>
               ) : (
