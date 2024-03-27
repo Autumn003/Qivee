@@ -83,10 +83,6 @@ const newReviewSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-    // .addCase(newReview.reset, (state) => {
-    //   state.loading = false;
-    //   state.success = false;
-    // });
   },
 });
 

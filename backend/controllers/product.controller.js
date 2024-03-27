@@ -2,7 +2,6 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Product } from "../models/product.model.js";
-import { ApiFeatures } from "../utils/ApiFeatures.js";
 
 // create a product -- ADMIN
 const createProduct = asyncHandler(async (req, res) => {
@@ -14,26 +13,6 @@ const createProduct = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(200, product, "product created successfully"));
 });
-
-// get all products
-// const getAllProducts = asyncHandler(async (req, res) => {
-//   const resultPerPage = 8;
-//   const productCount = await Product.countDocuments();
-
-//   const apiFeature = new ApiFeatures(Product.find(), req.query)
-//     .search()
-//     .filter()
-//     .pagination(resultPerPage);
-//   const products = await apiFeature.query;
-
-//   return res.status(201).json({
-//     success: true,
-//     products,
-//     productCount,
-//     resultPerPage,
-//     message: "all products are fetched successfully",
-//   });
-// });
 
 // get all products
 const getAllProducts = asyncHandler(async (req, res) => {
