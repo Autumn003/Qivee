@@ -157,7 +157,11 @@ const createProductReview = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(
-      new ApiResponse(200, {}, "Your review has been updated successfully")
+      new ApiResponse(
+        200,
+        { success: true },
+        "Your review has been updated successfully"
+      )
     );
 });
 

@@ -39,7 +39,7 @@ export const newReview = createAsyncThunk(
       };
 
       const response = await axios.put("/api/v1/review", reviewData, config);
-      return response.data;
+      return response.data.success;
     } catch (error) {
       return rejectWithValue(error.message);
     }

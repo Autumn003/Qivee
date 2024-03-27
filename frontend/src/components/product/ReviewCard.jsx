@@ -13,9 +13,11 @@ const ReviewCard = ({ review }) => {
   };
 
   return (
-    <div className="items-center justify-center min-w-96 min-h-64 p-2 border-slate-400 border-[1px]">
-      <img src={profileImg} alt="User" className="h-16" />
-      <p>{review.name}</p>
+    <div className="items-center justify-center md:min-w-96 min-w-60 md:min-h-64 h-40 overflow-y-scroll p-2 border-slate-400 border-[1px]">
+      <div className="flex md:flex-none items-center">
+        <img src={profileImg} alt="User" className="h-16" />
+        <p>{review.name}</p>
+      </div>
       <ReactStars {...options} />
       <span className="text-sm">{review.comment}</span>
     </div>
