@@ -8,7 +8,6 @@ import {
 } from "../../actions/productAction";
 import { Loader } from "../index";
 import ReviewCard from "./ReviewCard.jsx";
-import ReactStars from "react-rating-stars-component";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addToCart } from "../../actions/cartAction.js";
@@ -104,12 +103,10 @@ const ProductDetails = () => {
   };
 
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "rgb(30, 41, 59)",
-    size: window.innerWidth < 600 ? 20 : 25,
+    size: "large",
     value: productDetail.ratings,
-    isHalf: true,
+    readOnly: true,
+    precision: 0.5,
   };
 
   const [quantity, setQuantity] = useState(1);
@@ -166,7 +163,7 @@ const ProductDetails = () => {
                   </p>
                 </div>
                 <div className="detailsBlock-2 flex w-96 items-center my-4 border-y-[1px] py-2 border-slate-600">
-                  <ReactStars {...options} />
+                  <Rating {...options} />
                   <span className=" ml-2">
                     ({productDetail.numberOfReview} Reviews)
                   </span>
