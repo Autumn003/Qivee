@@ -1,13 +1,26 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, getProductDetails } from "../../actions/productAction";
+import {
+  clearErrors,
+  getProductDetails,
+  newReview,
+} from "../../actions/productAction";
 import { Loader } from "../index";
 import ReviewCard from "./ReviewCard.jsx";
 import ReactStars from "react-rating-stars-component";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
 import { addToCart } from "../../actions/cartAction.js";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+} from "@mui/material";
+// import { Rating } from "@mui/lab";
+import { Rating } from "@mui/material";
 
 const ProductDetails = () => {
   let { id } = useParams();
@@ -23,9 +36,29 @@ const ProductDetails = () => {
   const [slides, setSlides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
   const addToCartHandler = () => {
     dispatch(addToCart({ id, quantity: quantity }));
     alert.success("Item added to cart");
+  };
+
+  const submitReviewToggle = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
+  const submitReviewHandler = () => {
+    const myForm = new FormData();
+
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("productId", id);
+
+    dispatch(newReview({ reviewData: myForm }));
+    setOpen(false);
+    alert.success("Your review has been submitted!");
   };
 
   useEffect(() => {
@@ -188,7 +221,10 @@ const ProductDetails = () => {
                   <p className="text-lg font-semibold">Description :</p>
                   <p className="text-slate-500 ">{productDetail.description}</p>
                 </div>
-                <button className="submitReview  bg-slate-400 text-slate-900 duration-200 hover:scale-105 p-3 w-40 rounded-full font-semibold my-4">
+                <button
+                  onClick={submitReviewToggle}
+                  className="submitReview  bg-slate-400 text-slate-900 duration-200 hover:scale-105 p-3 w-40 rounded-full font-semibold my-4"
+                >
                   Submit Review
                 </button>
               </div>
@@ -197,13 +233,43 @@ const ProductDetails = () => {
             <h3 className="text-slate-900 text-2xl border-b-[1px] my-5 pb-2 w-44 text-center m-auto border-slate-400 ">
               Reviews
             </h3>
+
+            <Dialog
+              aria-labelledby="simple-dialog-title"
+              open={open}
+              onClose={submitReviewToggle}
+            >
+              <DialogTitle>Submit Review</DialogTitle>
+              <DialogContent className="submitDialog flex flex-col">
+                <Rating
+                  onChange={(e) => setRating(e.target.value)}
+                  value={Number(rating)}
+                  size="large"
+                />
+
+                <textarea
+                  className="submitDialogTextArea p-4 my-2 border-2 border-slate-300 rounded-md"
+                  cols="30"
+                  rows="4"
+                  placeholder="Write your review here..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                ></textarea>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={submitReviewToggle}>Cancel</Button>
+                <Button onClick={submitReviewHandler}>Submit</Button>
+              </DialogActions>
+            </Dialog>
+
             <div className="">
-              {productDetail.reviews && productDetail.reviews[0] ? (
+              {productDetail &&
+              productDetail.reviews &&
+              productDetail.reviews.length > 0 ? (
                 <div className="flex flex-none m-10 overflow-x-auto gap-5">
-                  {productDetail.reviews &&
-                    productDetail.reviews.map((review) => (
-                      <ReviewCard key={review._id} review={review} />
-                    ))}
+                  {productDetail.reviews.map((review) => (
+                    <ReviewCard key={review._id} review={review} />
+                  ))}
                 </div>
               ) : (
                 <p className=" text-xl text-slate-600 text-center pb-10">

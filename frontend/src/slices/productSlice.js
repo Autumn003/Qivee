@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts, getProductDetails } from "../actions/productAction";
+import {
+  getProducts,
+  getProductDetails,
+  newReview,
+} from "../actions/productAction";
 
 export const productSlice = createSlice({
   name: "products",
@@ -57,8 +61,38 @@ const productDetailSlice = createSlice({
   },
 });
 
+const newReviewSlice = createSlice({
+  name: "review",
+  initialState: {
+    success: false,
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(newReview.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(newReview.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = action.payload;
+      })
+      .addCase(newReview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+    // .addCase(newReview.reset, (state) => {
+    //   state.loading = false;
+    //   state.success = false;
+    // });
+  },
+});
+
 export const { clearProductData } = productSlice.actions;
 export const { clearProductDetailData } = productDetailSlice.actions;
 
 export const productReducer = productSlice.reducer;
 export const productDetailReducer = productDetailSlice.reducer;
+export const newReviewReducer = newReviewSlice.reducer;

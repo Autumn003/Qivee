@@ -1,5 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productReducer, productDetailReducer } from "../slices/productSlice";
+import {
+  productReducer,
+  productDetailReducer,
+  newReviewReducer,
+} from "../slices/productSlice";
 import { userReducer } from "../slices/userSlice";
 import { forgotPasswordReducer, profileReducer } from "../slices/profileSlice";
 import { cartReducer } from "../slices/cartSlice";
@@ -20,6 +24,7 @@ const store = configureStore({
     newOrder: orderReducer,
     myOrder: myOrderReducer,
     orderDetails: OrderDetailsReducer,
+    newReview: newReviewReducer,
   },
 });
 
