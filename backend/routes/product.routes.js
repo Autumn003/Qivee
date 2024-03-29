@@ -3,6 +3,7 @@ import { Router } from "express";
 import {
   createProduct,
   getAllProducts,
+  getAdminProducts,
   updateProduct,
   deleteProduct,
   getProductDetails,
@@ -18,6 +19,11 @@ import {
 const router = Router();
 
 router.route("/products").get(getAllProducts);
+
+router
+  .route("/admin/products")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
+
 router
   .route("/admin/product/new")
   .post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);

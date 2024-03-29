@@ -49,6 +49,17 @@ const getAllProducts = asyncHandler(async (req, res) => {
   });
 });
 
+// get all products -- (ADMIN)
+const getAdminProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find();
+
+  return res.status(200).json({
+    success: true,
+    products,
+    message: "All products fetched successfully",
+  });
+});
+
 // update product -- ADMIN
 const updateProduct = asyncHandler(async (req, res) => {
   let product = await Product.findById(req.params.id);
@@ -206,6 +217,7 @@ const deleteReview = asyncHandler(async (req, res) => {
 export {
   createProduct,
   getAllProducts,
+  getAdminProducts,
   updateProduct,
   deleteProduct,
   getProductDetails,
