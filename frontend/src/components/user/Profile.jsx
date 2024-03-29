@@ -93,7 +93,7 @@ const Profile = ({ user }) => {
                 </Link>
                 {isAdmin && ( // Render "Dashboard" link only if user is admin
                   <Link
-                    to="/dashboard"
+                    to="/admin/dashboard"
                     className="w-72 h-14 bg-slate-400 flex items-center rounded-full justify-center text-xl hover:scale-105 duration-200 ease-in text-slate-800 font-semibold outline-none"
                   >
                     Dashboard

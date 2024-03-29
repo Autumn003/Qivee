@@ -18,6 +18,7 @@ import Payment from "./cart/Payment";
 import OrderSuccess from "./cart/OrderSuccess";
 import MyOrders from "./orders/MyOrders";
 import OrderDetails from "./orders/OrderDetails";
+import Dashboard from "./admin/Dashboard";
 
 export {
   Header,
@@ -40,4 +41,5 @@ export {
   OrderSuccess,
   MyOrders,
   OrderDetails,
+  Dashboard,
 };
