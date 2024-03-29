@@ -3,6 +3,8 @@ import {
   getProducts,
   getProductDetails,
   newReview,
+  getAdminProducts,
+  createProduct,
 } from "../actions/productAction";
 
 export const productSlice = createSlice({
@@ -18,19 +20,57 @@ export const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getProducts.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getProducts.fulfilled, (state, action) => {
-      state.loading = false;
-      state.data = action.payload;
-      state.resultPerPage = action.payload.resultPerPage;
-    });
-    builder.addCase(getProducts.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
+    builder
+      .addCase(getProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+        state.resultPerPage = action.payload.resultPerPage;
+      })
+      .addCase(getProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(getAdminProducts.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getAdminProducts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(getAdminProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+const createProductSlice = createSlice({
+  name: "newProduct",
+  initialState: {
+    product: {},
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(createProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.product = action.payload;
+      })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
@@ -92,3 +132,4 @@ export const { clearProductDetailData } = productDetailSlice.actions;
 export const productReducer = productSlice.reducer;
 export const productDetailReducer = productDetailSlice.reducer;
 export const newReviewReducer = newReviewSlice.reducer;
+export const createProductReducer = createProductSlice.reducer;

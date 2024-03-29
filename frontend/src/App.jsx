@@ -25,6 +25,7 @@ import {
   MyOrders,
   OrderDetails,
   Dashboard,
+  ProductList,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
@@ -154,6 +155,12 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
         ) : (
           <Route path="/admin/dashboard" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated && user.role === "admin" ? (
+          <Route path="/admin/products" element={<ProductList />} />
+        ) : (
+          <Route path="/admin/products" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />

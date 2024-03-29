@@ -3,6 +3,7 @@ import {
   productReducer,
   productDetailReducer,
   newReviewReducer,
+  createProductReducer,
 } from "../slices/productSlice";
 import { userReducer } from "../slices/userSlice";
 import { forgotPasswordReducer, profileReducer } from "../slices/profileSlice";
@@ -25,6 +26,7 @@ const store = configureStore({
     myOrder: myOrderReducer,
     orderDetails: OrderDetailsReducer,
     newReview: newReviewReducer,
+    createProduct: createProductReducer,
   },
 });
 

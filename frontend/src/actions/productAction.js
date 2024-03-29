@@ -14,6 +14,42 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// get Admin products
+export const getAdminProducts = createAsyncThunk(
+  "Admin/products",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get("/api/v1/admin/products");
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// ADD NEW PRODUCT
+export const createProduct = createAsyncThunk(
+  "createProduct",
+  async ({ productData }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await axios.post(
+        "/api/v1/admin/product/new",
+        productData,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Get single product details
 export const getProductDetails = createAsyncThunk(
   "product/getProductDetails",
@@ -27,7 +63,7 @@ export const getProductDetails = createAsyncThunk(
   }
 );
 
-// Get single product details
+// ADD REVIEW
 export const newReview = createAsyncThunk(
   "product/review",
   async ({ reviewData }, { rejectWithValue }) => {

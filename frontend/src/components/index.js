@@ -19,6 +19,7 @@ import OrderSuccess from "./cart/OrderSuccess";
 import MyOrders from "./orders/MyOrders";
 import OrderDetails from "./orders/OrderDetails";
 import Dashboard from "./admin/Dashboard";
+import ProductList from "./admin/ProductList";
 
 export {
   Header,
@@ -42,4 +43,5 @@ export {
   MyOrders,
   OrderDetails,
   Dashboard,
+  ProductList,
 };

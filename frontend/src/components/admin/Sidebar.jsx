@@ -15,13 +15,13 @@ import { MdLibraryBooks } from "react-icons/md";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar px-12 py-8">
+    <div className="sidebar md:px-12 px-4 md:py-8 py-4 sticky top-0 md:h-screen flex flex-row md:flex-col justify-evenly overflow-x-scroll gap-6">
       <Link to="/admin/dashboard">
-        <p className="flex items-center py-6 gap-2 text-slate-600 hover:text-slate-900 hover:translate-x-3 hover:scale-105 duration-200">
+        <p className="flex items-center py-4 gap-2 text-slate-600 hover:text-slate-900 md:hover:translate-x-3 md:hover:scale-105 duration-200">
           <MdDashboard /> Dashboard
         </p>
       </Link>
-      <Link className="flex items-center py-6 text-slate-600 hover:text-slate-900 hover:translate-x-3 hover:scale-105 duration-200">
+      <Link className="flex items-center py-3 text-slate-600 hover:text-slate-900 md:hover:translate-x-3 md:hover:scale-105 duration-200">
         <SimpleTreeView
           defaultcollapseicon={<MdExpandMore />}
           defaultexpandicon={<MdImportExport />}
@@ -42,18 +42,18 @@ const Sidebar = () => {
         </SimpleTreeView>
       </Link>
       <Link to="/admin/orders">
-        <p className="flex items-center py-6 gap-2 text-slate-600 hover:text-slate-900 hover:translate-x-3 hover:scale-105 duration-200">
+        <p className="flex items-center py-4 gap-2 text-slate-600 hover:text-slate-900 md:hover:translate-x-3 md:hover:scale-105 duration-200">
           <FaRegListAlt />
           Orders
         </p>
       </Link>
       <Link to="/admin/users">
-        <p className="flex items-center py-6 gap-2 text-slate-600 hover:text-slate-900 hover:translate-x-3 hover:scale-105 duration-200">
+        <p className="flex items-center py-4 gap-2 text-slate-600 hover:text-slate-900 md:hover:translate-x-3 md:hover:scale-105 duration-200">
           <MdPeople /> Users
         </p>
       </Link>
       <Link to="/admin/reviews">
-        <p className="flex items-center py-6 gap-2 text-slate-600 hover:text-slate-900 hover:translate-x-3 hover:scale-105 duration-200">
+        <p className="flex items-center py-4 gap-2 text-slate-600 hover:text-slate-900 md:hover:translate-x-3 md:hover:scale-105 duration-200">
           <MdRateReview />
           Reviews
         </p>

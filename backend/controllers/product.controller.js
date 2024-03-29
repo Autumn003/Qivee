@@ -53,11 +53,9 @@ const getAllProducts = asyncHandler(async (req, res) => {
 const getAdminProducts = asyncHandler(async (req, res) => {
   const products = await Product.find();
 
-  return res.status(200).json({
-    success: true,
-    products,
-    message: "All products fetched successfully",
-  });
+  return res
+    .status(201)
+    .json(new ApiResponse(201, products, "all product fetched successfuly"));
 });
 
 // update product -- ADMIN
