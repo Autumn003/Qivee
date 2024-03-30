@@ -12,15 +12,15 @@ import {
   MdAttachMoney,
 } from "react-icons/md";
 import Sidebar from "./Sidebar";
+import { resetProduct } from "../../slices/productSlice";
 
 const NewProduct = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { loading, error, success } = useSelector(
-    (state) => state.createProduct
-  );
+  const { loading, error } = useSelector((state) => state.createProduct);
+  const { success } = useSelector((state) => state.createProduct.product);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState();
@@ -49,6 +49,7 @@ const NewProduct = () => {
     if (success) {
       alert.success("Product Created Successfully");
       navigate("/admin/dashboard");
+      dispatch(resetProduct());
     }
   }, [dispatch, alert, error, navigate, success]);
 

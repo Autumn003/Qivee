@@ -56,7 +56,13 @@ const createProductSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    resetProduct: (state) => {
+      state.product = {};
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createProduct.pending, (state) => {
@@ -128,6 +134,7 @@ const newReviewSlice = createSlice({
 
 export const { clearProductData } = productSlice.actions;
 export const { clearProductDetailData } = productDetailSlice.actions;
+export const { resetProduct } = createProductSlice.actions;
 
 export const productReducer = productSlice.reducer;
 export const productDetailReducer = productDetailSlice.reducer;
