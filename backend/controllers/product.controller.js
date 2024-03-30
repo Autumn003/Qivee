@@ -131,7 +131,7 @@ const createProductReview = asyncHandler(async (req, res) => {
   const review = {
     user: req.user._id,
     name: req.user.name,
-    ratting: Number(rating),
+    rating: Number(rating),
     comment,
   };
 
@@ -143,21 +143,23 @@ const createProductReview = asyncHandler(async (req, res) => {
 
   if (isReviewed) {
     product.reviews.forEach((rev) => {
-      if (rev.user.toString() === req.user._id.toString())
-        (rev.rating = rating), (rev.comment = comment);
+      if (rev.user.toString() === req.user._id.toString()) {
+        rev.rating = rating;
+        rev.comment = comment;
+      }
     });
   } else {
     product.reviews.push(review);
-    product.numberOfReview = product.reviews.length;
   }
 
-  let avg = 0;
-
+  // Recalculate average ratings
+  let totalRating = 0;
   product.reviews.forEach((rev) => {
-    avg += rev.rating;
+    totalRating += rev.rating;
   });
 
-  product.ratings = avg / product.reviews.length;
+  product.ratings = totalRating / product.reviews.length;
+  product.numberOfReviews = product.reviews.length;
 
   await product.save({ validateBeforeSave: false });
 
