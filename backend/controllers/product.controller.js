@@ -2,10 +2,29 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { Product } from "../models/product.model.js";
+import { v2 as cloudinary } from "cloudinary";
 
 // create a product -- ADMIN
 const createProduct = asyncHandler(async (req, res) => {
+  let images = [];
+
+  // Collect all images from the request
+  for (const key of Object.keys(req.body)) {
+    if (key.startsWith("image")) {
+      images.push(req.body[key]);
+    }
+  }
+
+  const imagesLink = [];
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.uploader.upload(images[i], {
+      folder: "products",
+    });
+    imagesLink.push({ public_id: result.public_id, url: result.secure_url });
+  }
+
   req.body.user = req.user.id;
+  req.body.images = imagesLink;
 
   const product = await Product.create(req.body);
 
