@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Sidebar from "./Sidebar";
+import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
+import {
+  clearErrors,
+  deleteProduct,
+  getAdminProducts,
+} from "../../actions/productAction";
+import { deleteReset } from "../../slices/productSlice";
+// import { useParams } from "react-router-dom";
 
 const ProductList = () => {
   const products = useSelector((state) => state.products.data);
+  const { error } = useSelector((state) => state.products);
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
+
+  const dispatch = useDispatch();
+  const alert = useAlert();
+  const navigate = useNavigate();
+  // let { id } = useParams();
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct({ id }));
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      alert.success("Product Deleted Successfully");
+      navigate("/admin/dashboard");
+      dispatch(deleteReset());
+    }
+
+    dispatch(getAdminProducts());
+  }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
 
   return (
     <>
@@ -52,7 +94,10 @@ const ProductList = () => {
                     <button className="hover:bg-slate-300 md:p-3 p-[6px] rounded-full duration-200">
                       <MdEdit />
                     </button>
-                    <button className="hover:bg-slate-300 md:p-3 p-[6px] rounded-full duration-200">
+                    <button
+                      onClick={() => deleteProductHandler(item._id)}
+                      className="hover:bg-slate-300 md:p-3 p-[6px] rounded-full duration-200"
+                    >
                       <MdDelete />
                     </button>
                   </div>

@@ -5,9 +5,10 @@ import {
   newReview,
   getAdminProducts,
   createProduct,
+  deleteProduct,
 } from "../actions/productAction";
 
-export const productSlice = createSlice({
+export const productsSlice = createSlice({
   name: "products",
   initialState: {
     data: [],
@@ -43,6 +44,38 @@ export const productSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(getAdminProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+const productSlice = createSlice({
+  name: "product",
+  initialState: {
+    success: false,
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    deleteReset: (state) => {
+      state.success = false;
+      state.loading = false;
+      state.error = null;
+      state.isDeleted = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(deleteProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isDeleted = action.payload.success;
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
@@ -135,8 +168,10 @@ const newReviewSlice = createSlice({
 export const { clearProductData } = productSlice.actions;
 export const { clearProductDetailData } = productDetailSlice.actions;
 export const { resetProduct } = createProductSlice.actions;
+export const { deleteReset } = productSlice.actions;
 
-export const productReducer = productSlice.reducer;
+export const productsReducer = productsSlice.reducer;
 export const productDetailReducer = productDetailSlice.reducer;
 export const newReviewReducer = newReviewSlice.reducer;
 export const createProductReducer = createProductSlice.reducer;
+export const productReducer = productSlice.reducer;

@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  productReducer,
+  productsReducer,
   productDetailReducer,
   newReviewReducer,
   createProductReducer,
+  productReducer,
 } from "../slices/productSlice";
 import { userReducer } from "../slices/userSlice";
 import { forgotPasswordReducer, profileReducer } from "../slices/profileSlice";
@@ -16,7 +17,7 @@ import {
 
 const store = configureStore({
   reducer: {
-    products: productReducer,
+    products: productsReducer,
     productDetails: productDetailReducer,
     user: userReducer,
     profile: profileReducer,
@@ -27,6 +28,7 @@ const store = configureStore({
     orderDetails: OrderDetailsReducer,
     newReview: newReviewReducer,
     createProduct: createProductReducer,
+    product: productReducer,
   },
 });
 

@@ -117,11 +117,18 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new ApiError(400, "product not found");
   }
 
+  // Deleting Images From Cloudinary
+  for (let i = 0; i < product.images.length; i++) {
+    await cloudinary.uploader.destroy(product.images[i].public_id);
+  }
+
   await product.deleteOne();
 
   return res
     .status(201)
-    .json(new ApiResponse(201, {}, "Product deleted successfuly"));
+    .json(
+      new ApiResponse(201, { success: true }, "Product deleted successfuly")
+    );
 });
 
 // create new review or update review
