@@ -91,9 +91,12 @@ const ProductList = () => {
                     <p>₹{item.price}</p>
                   </div>
                   <div className="cartSubtotal col-span-1 m-2 flex items-center justify-end  text-xl">
-                    <button className="hover:bg-slate-300 md:p-3 p-[6px] rounded-full duration-200">
+                    <Link
+                      to={`/admin/product/${item._id}`}
+                      className="hover:bg-slate-300 md:p-3 p-[6px] rounded-full duration-200"
+                    >
                       <MdEdit />
-                    </button>
+                    </Link>
                     <button
                       onClick={() => deleteProductHandler(item._id)}
                       className="hover:bg-slate-300 md:p-3 p-[6px] rounded-full duration-200"

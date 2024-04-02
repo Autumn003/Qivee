@@ -6,6 +6,7 @@ import {
   getAdminProducts,
   createProduct,
   deleteProduct,
+  updateProduct,
 } from "../actions/productAction";
 
 export const productsSlice = createSlice({
@@ -64,6 +65,12 @@ const productSlice = createSlice({
       state.error = null;
       state.isDeleted = null;
     },
+    updateReset: (state) => {
+      state.success = false;
+      state.loading = false;
+      state.error = null;
+      state.isUpdated = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -76,6 +83,18 @@ const productSlice = createSlice({
         state.isDeleted = action.payload.success;
       })
       .addCase(deleteProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isUpdated = action.payload.success;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
@@ -169,6 +188,7 @@ export const { clearProductData } = productSlice.actions;
 export const { clearProductDetailData } = productDetailSlice.actions;
 export const { resetProduct } = createProductSlice.actions;
 export const { deleteReset } = productSlice.actions;
+export const { updateReset } = productSlice.actions;
 
 export const productsReducer = productsSlice.reducer;
 export const productDetailReducer = productDetailSlice.reducer;

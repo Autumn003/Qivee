@@ -50,6 +50,29 @@ export const createProduct = createAsyncThunk(
   }
 );
 
+// UPDATE PRODUCT
+export const updateProduct = createAsyncThunk(
+  "createProduct",
+  async ({ id, productData }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await axios.put(
+        `/api/v1/admin/product/${id}`,
+        productData,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // delete PRODUCT
 export const deleteProduct = createAsyncThunk(
   "deleteProduct",
@@ -66,7 +89,7 @@ export const deleteProduct = createAsyncThunk(
 // Get single product details
 export const getProductDetails = createAsyncThunk(
   "product/getProductDetails",
-  async ({ id, apiUrl }, { rejectWithValue }) => {
+  async ({ apiUrl }, { rejectWithValue }) => {
     try {
       const response = await axios.get(apiUrl);
       return response.data;

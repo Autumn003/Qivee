@@ -28,7 +28,10 @@ const Dashboard = () => {
               </p>
             </div>
             <div className="flex flex-col md:flex-row justify-evenly my-10  text-xl items-center gap-5 ">
-              <Link className="w-40 flex flex-col items-center justify-center h-40 bg-red-400 rounded-full">
+              <Link
+                to={"/admin/products"}
+                className="w-40 flex flex-col items-center justify-center h-40 bg-red-400 rounded-full"
+              >
                 <p>Products</p>
                 <p>{totalproducts}</p>
               </Link>

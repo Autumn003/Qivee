@@ -67,7 +67,6 @@ const ProductDetails = () => {
     }
     dispatch(
       getProductDetails({
-        id: id,
         apiUrl: `/api/v1/product/${id}`,
       })
     );
