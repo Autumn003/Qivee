@@ -85,6 +85,32 @@ const updateProduct = asyncHandler(async (req, res) => {
     throw new ApiError(400, "product not found");
   }
 
+  let images = [];
+
+  // Collect all images from the request
+  for (const key of Object.keys(req.body)) {
+    if (key.startsWith("image")) {
+      images.push(req.body[key]);
+    }
+  }
+
+  if (images !== undefined) {
+    // Deleting Images From Cloudinary
+    for (let i = 0; i < product.images.length; i++) {
+      await cloudinary.uploader.destroy(product.images[i].public_id);
+    }
+  }
+
+  const imagesLink = [];
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.uploader.upload(images[i], {
+      folder: "products",
+    });
+    imagesLink.push({ public_id: result.public_id, url: result.secure_url });
+  }
+
+  req.body.images = imagesLink;
+
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
