@@ -36,6 +36,8 @@ const OrderList = () => {
         return "bg-amber-200 text-amber-900";
       case "Delivered":
         return "bg-green-200 text-green-900";
+      case "Shipped":
+        return "bg-blue-200 text-sky-900";
     }
   };
 

@@ -37,6 +37,17 @@ const ProcessOrder = () => {
     dispatch(updateOrder({ id: id, order: myForm }));
   };
 
+  const getOrderStatusColor = (status) => {
+    switch (status) {
+      case "Processing":
+        return "bg-amber-200 text-amber-900";
+      case "Delivered":
+        return "bg-green-200 text-green-900";
+      case "Shipped":
+        return "bg-blue-200 text-sky-900";
+    }
+  };
+
   useEffect(() => {
     dispatch(orderDetails(id));
 
@@ -131,13 +142,9 @@ const ProcessOrder = () => {
                 <div className="">
                   <div className="w-fit">
                     <p
-                      className={`px-3 py-1 rounded-full font-semibold ${
-                        order &&
-                        order.orderStatus &&
-                        order.orderStatus === "Delivered"
-                          ? "bg-green-200 text-green-900"
-                          : "bg-amber-200 text-amber-900"
-                      }`}
+                      className={`px-3 py-1 rounded-full font-semibold ${getOrderStatusColor(
+                        order && order.orderStatus
+                      )}`}
                     >
                       {order && order.orderStatus && order.orderStatus}
                     </p>
@@ -179,10 +186,10 @@ const ProcessOrder = () => {
             </div>
           </div>
           {/*  */}
-          <div className="col-span-1 ">
-            <div className="orderSummary flex flex-col items-center m-8 md:m-16">
+          <div className={"col-span-1 "}>
+            <div className="flex flex-col items-center m-8 md:m-16">
               <h1 className="font-semibold text-2xl mt-6 text-slate-600">
-                Order Summary
+                Process Order
               </h1>
               {/*  */}
 
@@ -211,7 +218,9 @@ const ProcessOrder = () => {
                 <button
                   id="createProductBtn"
                   type="submit"
-                  disabled={loading ? true : false}
+                  disabled={
+                    loading ? true : false || status === "" ? true : false
+                  }
                   className="createProductBtn bg-slate-400 w-64 h-12 mb-5 rounded-full text-xl font-semibold cursor-pointer text-slate-800 hover:scale-105 duration-200"
                 >
                   Update
