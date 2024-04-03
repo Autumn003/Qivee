@@ -23,6 +23,7 @@ import ProductList from "./admin/ProductList";
 import NewProduct from "./admin/NewProduct";
 import UpdateProduct from "./admin/UpdateProduct";
 import OrderList from "./admin/OrderList";
+import ProcessOrder from "./admin/ProcessOrder";
 
 export {
   Header,
@@ -50,4 +51,5 @@ export {
   NewProduct,
   UpdateProduct,
   OrderList,
+  ProcessOrder,
 };
