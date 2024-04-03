@@ -22,6 +22,7 @@ import Dashboard from "./admin/Dashboard";
 import ProductList from "./admin/ProductList";
 import NewProduct from "./admin/NewProduct";
 import UpdateProduct from "./admin/UpdateProduct";
+import OrderList from "./admin/OrderList";
 
 export {
   Header,
@@ -48,4 +49,5 @@ export {
   ProductList,
   NewProduct,
   UpdateProduct,
+  OrderList,
 };

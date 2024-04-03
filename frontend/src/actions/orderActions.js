@@ -57,6 +57,55 @@ export const orderDetails = createAsyncThunk(
   }
 );
 
+// get all order - (Admin)
+export const allOrders = createAsyncThunk(
+  "admin/allOrders",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/v1/admin/orders`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// update order - (Admin)
+export const updateOrder = createAsyncThunk(
+  "admin/updateOrder",
+  async ({ id, order }, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await axios.put(
+        `/api/v1/admin/order/${id}`,
+        order,
+        config
+      );
+      return response.data.success;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// delete order - (Admin)
+export const deleteOrder = createAsyncThunk(
+  "admin/deleteOrder",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`/api/v1/admin/order/${id}`);
+      return response.data.success;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // to clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch("order/clearError");

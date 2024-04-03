@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createOrder, myOrders, orderDetails } from "../actions/orderActions";
+import {
+  allOrders,
+  createOrder,
+  deleteOrder,
+  myOrders,
+  orderDetails,
+  updateOrder,
+} from "../actions/orderActions";
 
 const initialState = {
   orders: [],
@@ -74,6 +81,71 @@ const OrderDetaislSlice = createSlice({
   },
 });
 
+const allOrdersSlice = createSlice({
+  name: "allOrders",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(allOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(allOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+        state.loading = false;
+      })
+      .addCase(allOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+const ordersSlice = createSlice({
+  name: "orders",
+  initialState: {},
+  reducers: {
+    updateOrderReset: (state) => {
+      state.isUpdated = false;
+    },
+    deleteOrderReset: (state) => {
+      state.isDeleted = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(updateOrder.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isUpdated = action.payload;
+      })
+      .addCase(updateOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteOrder.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isDeleted = action.payload;
+      })
+      .addCase(deleteOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export const { updateOrderReset, deleteOrderReset } = ordersSlice.actions;
+
 export const orderReducer = orderSlice.reducer;
 export const myOrderReducer = myOrderSlice.reducer;
 export const OrderDetailsReducer = OrderDetaislSlice.reducer;
+export const allOrdersReducer = allOrdersSlice.reducer;
+export const ordersReducer = ordersSlice.reducer;
