@@ -83,9 +83,11 @@ const updateOrder = asyncHandler(async (req, res) => {
     throw new ApiError(400, "You have already delivered this order");
   }
 
-  order.orderItems.forEach(async (key) => {
-    await updateStock(key.product, key.quantity);
-  });
+  if (req.body.status === "Shipped") {
+    order.orderItems.forEach(async (key) => {
+      await updateStock(key.product, key.quantity);
+    });
+  }
 
   order.orderStatus = req.body.status;
 
