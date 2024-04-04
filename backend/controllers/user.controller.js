@@ -257,6 +257,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, `User does not exist with Id: ${req.params.id}`);
   }
 
+  const imageId = user.avatar.public_id;
+
+  await cloudinary.uploader.destroy(imageId);
+
   await user.deleteOne();
 
   return res
