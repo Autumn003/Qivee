@@ -31,6 +31,7 @@ import {
   OrderList,
   ProcessOrder,
   UserList,
+  UpdateUser,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
@@ -196,6 +197,12 @@ function App() {
           <Route path="/admin/users" element={<UserList />} />
         ) : (
           <Route path="/admin/users" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated && user.role === "admin" ? (
+          <Route path="/admin/user/:id" element={<UpdateUser />} />
+        ) : (
+          <Route path="/admin/user/:id" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />

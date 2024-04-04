@@ -25,6 +25,7 @@ import UpdateProduct from "./admin/UpdateProduct";
 import OrderList from "./admin/OrderList";
 import ProcessOrder from "./admin/ProcessOrder";
 import UserList from "./admin/UserList";
+import UpdateUser from "./admin/UpdateUser";
 
 export {
   Header,
@@ -54,4 +55,5 @@ export {
   OrderList,
   ProcessOrder,
   UserList,
+  UpdateUser,
 };
