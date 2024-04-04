@@ -6,12 +6,13 @@ import { getAdminProducts } from "../../actions/productAction";
 import { allOrders } from "../../actions/orderActions";
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
+import { allUsers } from "../../actions/userAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
   const totalproducts = useSelector((state) => state.products.data.length);
-  const totalorders = useSelector((state) => state.allOrders.orders.orders);
+  const { users } = useSelector((state) => state.allUsers);
 
   const { totalAmount, orders } = useSelector(
     (state) => state.allOrders.orders
@@ -21,6 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getAdminProducts());
     dispatch(allOrders());
+    dispatch(allUsers());
   }, [dispatch]);
 
   return (
@@ -59,9 +61,12 @@ const Dashboard = () => {
                     <p>Orders</p>
                     <p>{orders && orders.length}</p>
                   </Link>
-                  <Link className="w-40 flex flex-col items-center justify-center h-40 bg-amber-200 rounded-full">
+                  <Link
+                    to={"/admin/users"}
+                    className="w-40 flex flex-col items-center justify-center h-40 bg-amber-200 rounded-full"
+                  >
                     <p>Users</p>
-                    <p>5</p>
+                    <p>{users && users.length}</p>
                   </Link>
                 </div>
               </div>

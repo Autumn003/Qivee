@@ -58,6 +58,63 @@ export const logout = createAsyncThunk(
   }
 );
 
+// get all users
+export const allUsers = createAsyncThunk(
+  "admin/allUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/v1/admin/users`);
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// get user details - ADMIN
+export const userDetails = createAsyncThunk(
+  "admin/userDetails",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`/api/v1/admin/user/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// update  user - ADMIN
+export const updateUser = createAsyncThunk(
+  "admin/updateUser",
+  async ({ id, userData }, { rejectWithValue }) => {
+    try {
+      const config = { headers: { "Content-Type": "application/json" } };
+      const response = await axios.put(
+        `/api/v1/admin/user/${id}`,
+        userData,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// update  user - ADMIN
+export const deleteUser = createAsyncThunk(
+  "admin/deleteUser",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`/api/v1/admin/user/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // to clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: "user/clearErrors" });

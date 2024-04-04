@@ -6,7 +6,12 @@ import {
   createProductReducer,
   productReducer,
 } from "../slices/productSlice";
-import { userReducer } from "../slices/userSlice";
+import {
+  allUsersReducer,
+  updateUserReducer,
+  userDetailsReducer,
+  userReducer,
+} from "../slices/userSlice";
 import { forgotPasswordReducer, profileReducer } from "../slices/profileSlice";
 import { cartReducer } from "../slices/cartSlice";
 import {
@@ -33,6 +38,9 @@ const store = configureStore({
     product: productReducer,
     allOrders: allOrdersReducer,
     orders: ordersReducer,
+    allUsers: allUsersReducer,
+    userDetails: userDetailsReducer,
+    updateUser: updateUserReducer,
   },
 });
 
