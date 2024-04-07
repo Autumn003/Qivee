@@ -32,6 +32,7 @@ import {
   ProcessOrder,
   UserList,
   UpdateUser,
+  ProductReviews,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
@@ -203,6 +204,12 @@ function App() {
           <Route path="/admin/user/:id" element={<UpdateUser />} />
         ) : (
           <Route path="/admin/user/:id" element={<Navigate to="/login" />} />
+        )}
+
+        {isAuthenticated && user.role === "admin" ? (
+          <Route path="/admin/reviews" element={<ProductReviews />} />
+        ) : (
+          <Route path="/admin/reviews" element={<Navigate to="/login" />} />
         )}
       </Routes>
       <Footer />

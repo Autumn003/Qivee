@@ -7,6 +7,8 @@ import {
   createProduct,
   deleteProduct,
   updateProduct,
+  allReviews,
+  deleteReview,
 } from "../actions/productAction";
 
 export const productsSlice = createSlice({
@@ -184,14 +186,71 @@ const newReviewSlice = createSlice({
   },
 });
 
+const productReviewsSlice = createSlice({
+  name: "productReviews",
+  initialState: {
+    reviews: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(allReviews.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(allReviews.fulfilled, (state, action) => {
+        state.loading = false;
+        state.reviews = action.payload;
+      })
+      .addCase(allReviews.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+const reviewSlice = createSlice({
+  name: "productReviews",
+  initialState: {
+    review: {},
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    deleteReviewReset: (state) => {
+      state.isDeleted = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(deleteReview.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteReview.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isDeleted = action.payload.success;
+      })
+      .addCase(deleteReview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
 export const { clearProductData } = productSlice.actions;
 export const { clearProductDetailData } = productDetailSlice.actions;
 export const { resetProduct } = createProductSlice.actions;
 export const { deleteReset } = productSlice.actions;
 export const { updateReset } = productSlice.actions;
+export const { deleteReviewReset } = reviewSlice.actions;
 
 export const productsReducer = productsSlice.reducer;
 export const productDetailReducer = productDetailSlice.reducer;
 export const newReviewReducer = newReviewSlice.reducer;
 export const createProductReducer = createProductSlice.reducer;
 export const productReducer = productSlice.reducer;
+export const productReviewsReducer = productReviewsSlice.reducer;
+export const reviewReducer = reviewSlice.reducer;

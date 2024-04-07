@@ -118,6 +118,35 @@ export const newReview = createAsyncThunk(
   }
 );
 
+// get all reviews of a product
+export const allReviews = createAsyncThunk(
+  "producrReview",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      // const response = await axios.get(`/api/v1/reviews?id=${id}`);
+      const response = await axios.get(`/api/v1/reviews?id=${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// delete review of a product
+export const deleteReview = createAsyncThunk(
+  "deleteProduct",
+  async ({ reviewId, productId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(
+        `/api/v1/reviews?productId=${productId}&id=${reviewId}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // to clear errors
 export const clearErrors = () => (dispatch) => {
   dispatch({ type: "products/clearErrors" });

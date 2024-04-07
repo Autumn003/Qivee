@@ -5,6 +5,8 @@ import {
   newReviewReducer,
   createProductReducer,
   productReducer,
+  productReviewsReducer,
+  reviewReducer,
 } from "../slices/productSlice";
 import {
   allUsersReducer,
@@ -41,6 +43,8 @@ const store = configureStore({
     allUsers: allUsersReducer,
     userDetails: userDetailsReducer,
     updateUser: updateUserReducer,
+    productReview: productReviewsReducer,
+    review: reviewReducer,
   },
 });
 
