@@ -102,9 +102,9 @@ const NewProduct = () => {
         <div>
           <Sidebar />
         </div>
-        <div className="updatePasswordContainer flex justify-center w-full bg-slate-200 items-center ">
+        <div className="updatePasswordContainer flex justify-center w-full items-center ">
           <form
-            className="newProductContainer bg-white w-80 md:w-96 my-10 sm:h-auto h-[65%] box-border rounded-2xl flex flex-col items-center space-y-6"
+            className="newProductContainer border border-slate-300 bg-slate-200 w-80 md:w-96 my-10 sm:h-auto h-[65%] box-border rounded-2xl flex flex-col items-center space-y-6"
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >

@@ -15,7 +15,7 @@ import { MdLibraryBooks } from "react-icons/md";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar md:px-12 px-4 md:py-8 py-4 sticky top-0 md:h-screen flex flex-row md:flex-col justify-evenly overflow-x-scroll gap-6">
+    <div className="sidebar bg-slate-200 md:px-12 px-4 md:py-8 py-4 sticky top-0 md:h-screen flex flex-row md:flex-col justify-evenly overflow-x-scroll md:overflow-x-hidden gap-6">
       <Link to="/admin/dashboard">
         <p className="flex items-center py-4 gap-2 text-slate-600 hover:text-slate-900 md:hover:translate-x-3 md:hover:scale-105 duration-200">
           <MdDashboard /> Dashboard
