@@ -83,7 +83,7 @@ const ProcessOrder = () => {
                 <div className="flex gap-3 my-2">
                   <p>Name:</p>
                   <span className="text-slate-600">
-                    {order && order.shippingInfo.name.toUpperCase()}
+                    {order && order.shippingInfo.name}
                   </span>
                 </div>
                 <div className="flex gap-3 my-2">
@@ -169,7 +169,7 @@ const ProcessOrder = () => {
                           <img
                             src={item.image}
                             alt="Product"
-                            className="w-fit h-20 rounded-lg object-cover"
+                            className="w-16 h-20 rounded-lg object-cover"
                           />
                         </div>
                         <div className=" text-center mx-4">
@@ -204,7 +204,7 @@ const ProcessOrder = () => {
                     onChange={(e) => setStatus(e.target.value)}
                     className="px-10 py-2 pr-2 w-60 border-[1px] border-slate-400 rounded-md outline-none"
                   >
-                    <option value="">Choose Category</option>
+                    <option value="">Status</option>
                     {order && order.orderStatus === "Processing" && (
                       <option value="Shipped">Shipped</option>
                     )}

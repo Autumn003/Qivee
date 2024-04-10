@@ -104,11 +104,11 @@ const NewProduct = () => {
         </div>
         <div className="updatePasswordContainer flex justify-center w-full items-center ">
           <form
-            className="newProductContainer border border-slate-300 bg-slate-200 w-80 md:w-96 my-10 sm:h-auto h-[65%] box-border rounded-2xl flex flex-col items-center space-y-6"
+            className="newProductContainer py-4 border border-slate-400  w-80 md:w-96 my-10 sm:h-auto h-[65%] box-border rounded-2xl flex flex-col items-center space-y-6"
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1 className="text-center pt-4 text-xl font-semibold text-slate-600">
+            <h1 className="text-center text-xl font-semibold text-slate-600">
               Create Product
             </h1>
             <div className="border-b-4 border-slate-400 w-36 mx-auto mb-10 rounded-full"></div>
