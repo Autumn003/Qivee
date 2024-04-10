@@ -33,6 +33,7 @@ import {
   UserList,
   UpdateUser,
   ProductReviews,
+  NotFound,
 } from "./components";
 import WebFont from "webfontloader";
 import { useEffect, useState } from "react";
@@ -69,6 +70,8 @@ function App() {
     store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
+
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
 
   return (
     <Router>
@@ -211,6 +214,7 @@ function App() {
         ) : (
           <Route path="/admin/reviews" element={<Navigate to="/login" />} />
         )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>

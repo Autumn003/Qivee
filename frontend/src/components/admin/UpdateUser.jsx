@@ -22,17 +22,17 @@ const UpdateUser = () => {
   } = useSelector((state) => state.updateUser);
   const { loading, error, user } = useSelector((state) => state.userDetails);
 
-  const [name, setName] = useState(user.data.name || "");
-  const [email, setEmail] = useState(user.data.email || "");
-  const [role, setRole] = useState(user.data.role || "");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     if (user._id !== id) {
       dispatch(userDetails({ id }));
     } else {
-      setName(userDetails.name);
-      setEmail(userDetails.email);
-      setRole(userDetails.role);
+      setName(user.name);
+      setEmail(user.email);
+      setRole(user.role);
     }
 
     if (error) {
@@ -50,7 +50,7 @@ const UpdateUser = () => {
       navigate("/admin/users");
       dispatch(updateUserReset());
     }
-  }, [dispatch, alert, error, navigate, isUpdated, id, userDetails]);
+  }, [dispatch, alert, error, navigate, isUpdated, id, userDetails, user]);
 
   const updateProductSubmitHandler = (e) => {
     e.preventDefault();
@@ -75,18 +75,18 @@ const UpdateUser = () => {
             <div>
               <Sidebar />
             </div>
-            <div className="updatePasswordContainer flex justify-center w-full bg-slate-200 items-center ">
+            <div className="updatePasswordContainer flex justify-center w-full  items-center ">
               <form
-                className="newProductContainer bg-white w-80 md:w-96 my-10 sm:h-auto h-[65%] box-border rounded-2xl flex flex-col items-center space-y-6"
+                className="newProductContainer bg-white w-80 md:w-96 my-10 sm:h-auto h-[65%] box-border border p-4 border-slate-400 rounded-2xl flex flex-col items-center space-y-6"
                 encType="multipart/form-data"
                 onSubmit={updateProductSubmitHandler}
               >
-                <h1 className="text-center pt-4 text-xl font-semibold text-slate-600">
+                <h1 className="text-center text-xl font-semibold text-slate-600">
                   Update User
                 </h1>
-                <div className="border-b-4 border-slate-400 w-36 mx-auto mb-10 rounded-full"></div>
+                <div className="border-b-4 border-slate-400 w-36 mx-auto  rounded-full"></div>
                 <div className="productName flex items-center w-[100%]">
-                  <MdSpellcheck className="absolute text-xl translate-x-12 md:translate-x-14" />
+                  <MdSpellcheck className="absolute text-xl translate-x-8 md:translate-x-10" />
                   <input
                     type="text"
                     placeholder="Product Name"
@@ -97,7 +97,7 @@ const UpdateUser = () => {
                   />
                 </div>
                 <div className="productName flex items-center w-[100%]">
-                  <MdEmail className="absolute text-xl translate-x-12 md:translate-x-14" />
+                  <MdEmail className="absolute text-xl translate-x-8 md:translate-x-10" />
                   <input
                     type="text"
                     placeholder="Email"

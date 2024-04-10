@@ -77,7 +77,7 @@ export const userDetails = createAsyncThunk(
   async ({ id }, { rejectWithValue }) => {
     try {
       const response = await axios.get(`/api/v1/admin/user/${id}`);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
