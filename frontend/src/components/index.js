@@ -28,6 +28,7 @@ import UserList from "./admin/UserList";
 import UpdateUser from "./admin/UpdateUser";
 import ProductReviews from "./admin/ProductReviews";
 import NotFound from "./layout/NotFound";
+import About from "./about/About";
 
 export {
   Header,
@@ -60,4 +61,5 @@ export {
   UpdateUser,
   ProductReviews,
   NotFound,
+  About,
 };
