@@ -1,5 +1,6 @@
 import React from "react";
 import { MdMail } from "react-icons/md";
+import MetaData from "../layout/MetaData";
 
 const About = () => {
   const email = (mailId) => {
@@ -8,6 +9,7 @@ const About = () => {
 
   return (
     <>
+      <MetaData title="About" />
       <div className="md:px-24 p-5 pt-10 pb-20 bg-slate-200 text-center">
         <h2 className=" text-slate-500 text-2xl my-5 italic">
           Get know about us
