@@ -121,7 +121,7 @@ const UpdateProduct = () => {
 
   return (
     <>
-      <MetaData title="Create Product" />
+      <MetaData title="Update Product" />
       <div className="flex flex-col md:flex-row">
         <div>
           <Sidebar />

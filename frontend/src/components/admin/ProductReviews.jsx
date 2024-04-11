@@ -9,6 +9,7 @@ import { allReviews, deleteReview } from "../../actions/productAction";
 import { clearErrors } from "../../actions/userAction";
 import { deleteReviewReset } from "../../slices/productSlice";
 import Loader from "../layout/Loader";
+import MetaData from "../layout/MetaData";
 
 const ProductReviews = () => {
   const { loading, error } = useSelector((state) => state.productReview);
@@ -55,6 +56,7 @@ const ProductReviews = () => {
 
   return (
     <>
+      <MetaData title="Product Review" />
       {loading ? (
         <Loader />
       ) : (

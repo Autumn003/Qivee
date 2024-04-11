@@ -50,8 +50,8 @@ const UpdatePassword = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title="Change Password - QIVEE" />
-          <div className="updatePasswordContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 fixed top-0 left-0">
+          <MetaData title="Change Password" />
+          <div className="updatePasswordContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 ">
             <div className="updatePasswordBox bg-white w-80 sm:h-4/5 h-[65%] box-border rounded-2xl">
               <h2 className="text-center p-4 text-xl font-semibold text-slate-600">
                 Change password

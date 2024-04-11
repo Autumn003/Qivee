@@ -3,6 +3,7 @@ import CartItemCard from "./CartItemCard";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../actions/cartAction";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../layout/MetaData";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Cart = () => {
 
   return (
     <>
+      <MetaData title="Cart" />
       <div className="md:p-10 p-2 min-h-screen">
         <div className="cartHeader grid md:grid-cols-5 grid-cols-4 md:mx-3">
           <p className="md:col-span-3 col-span-2 font-bold text-slate-700 text-lg m-2 ">

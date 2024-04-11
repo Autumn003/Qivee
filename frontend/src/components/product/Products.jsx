@@ -64,7 +64,7 @@ const Products = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title="Products - QIVEE" />
+          <MetaData title="Products" />
           <div className="h-auto w-full flex flex-wrap flex-col items-center ">
             <div className="flex justify-center items-center">
               <form onSubmit={handleSearch}>

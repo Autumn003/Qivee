@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../actions/userAction";
+import MetaData from "../layout/MetaData";
 
 const Profile = ({ user }) => {
   const { isAuthenticated, loading, error } = useSelector(
@@ -23,7 +24,7 @@ const Profile = ({ user }) => {
     dispatch(logout())
       .then(() => {
         alert.success("Logout successful");
-        navigate("/"); // Redirect to homepage after logout
+        navigate("/");
       })
       .catch((error) => {
         alert.error(`Logout failed: ${error}`);
@@ -36,6 +37,7 @@ const Profile = ({ user }) => {
         <Loader />
       ) : (
         <>
+          <MetaData title="Profile" />
           <div className="flex md:flex-row flex-col">
             <div className="w-screen flex items-center flex-col justify-evenly my-6 md:my-0">
               <h1 className="text-2xl font-semibold text-slate-500">

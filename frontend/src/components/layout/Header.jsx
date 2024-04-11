@@ -25,9 +25,11 @@ const Header = () => {
   ];
 
   return (
-    <div className="bg-slate-700 flex justify-between items-center h-20  mx-auto px-4 text-white">
+    <div className="bg-slate-700 flex justify-between items-center h-20 sticky top-0 z-50 mx-auto px-4 text-white">
       {/* Logo */}
-      <h1 className="w-full text-3xl font-bold text-white">QIVEE.</h1>
+      <div className="w-full">
+        <img src="/Qivee.png" alt="" className="md:h-16 h-14" />
+      </div>
 
       {/* Desktop Navigation */}
       <ul className="hidden md:flex">
@@ -72,7 +74,9 @@ const Header = () => {
         }
       >
         {/* Mobile Logo */}
-        <h1 className="w-full text-3xl font-bold text-white m-4">QIVEE.</h1>
+        <div className="w-full">
+          <img src="/Qivee.png" alt="" className="md:h-16 h-14" />
+        </div>
 
         {/* Mobile Navigation Items */}
         {navItems.map((item) => (

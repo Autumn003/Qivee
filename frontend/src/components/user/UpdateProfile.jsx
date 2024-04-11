@@ -78,8 +78,8 @@ const UpdateProfile = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title="Update profile - QIVEE" />
-          <div className="updateProfileContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 fixed top-0 left-0">
+          <MetaData title="Update profile" />
+          <div className="updateProfileContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 ">
             <div className="updateProfileBox bg-white w-80 sm:h-4/5 h-[65%] box-border rounded-2xl">
               <h2 className="text-center p-4 text-xl font-semibold text-slate-600">
                 Update profile
@@ -119,7 +119,7 @@ const UpdateProfile = () => {
                   <img
                     src={avatarPreview}
                     alt="Avatar Preview"
-                    className="w-16 rounded-full mx-3"
+                    className="w-16 h-16 rounded-full mx-3"
                   />
                   <input
                     type="file"

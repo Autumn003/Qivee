@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <MetaData title={"Dashboard - QIVEE"} />
+      <MetaData title={"Dashboard"} />
       {loading ? (
         <Loader />
       ) : (
@@ -41,9 +41,9 @@ const Dashboard = () => {
                 Dashboard
               </h1>
               <div className="dashboardSummary ">
-                <div className=" bg-slate-400 text-center py-2">
+                <div className=" bg-slate-400 text-center text-lg py-2">
                   <p>
-                    Total Amount <br /> {totalAmount}
+                    Total Amount <br /> ₹{totalAmount}
                   </p>
                 </div>
                 <div className="flex flex-col md:flex-row justify-evenly my-10  text-xl items-center gap-5 ">

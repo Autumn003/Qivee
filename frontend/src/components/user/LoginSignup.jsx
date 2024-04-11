@@ -102,8 +102,8 @@ const LoginSignup = () => {
         <Loader />
       ) : (
         <>
-          <div className="loginSignupContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 fixed top-0 left-0">
-            <div className="loginSignupBox bg-white w-80 sm:h-4/5 h-[65%] box-border rounded-2xl">
+          <div className="loginSignupContainer w-screen h-screen max-w-[100%] flex justify-center items-center bg-slate-200 ">
+            <div className="loginSignupBox bg-white w-80 sm:h-[75%] h-[65%] box-border rounded-2xl">
               <div>
                 <div className="loginSignupToggle flex h-[3vmax] mt-2">
                   <p

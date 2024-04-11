@@ -70,7 +70,7 @@ const UpdateUser = () => {
         <Loader />
       ) : (
         <>
-          <MetaData title="Update user - QIVEE" />
+          <MetaData title="Update user" />
           <div className="flex flex-col md:flex-row">
             <div>
               <Sidebar />
